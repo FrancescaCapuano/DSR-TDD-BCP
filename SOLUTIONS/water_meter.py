@@ -156,7 +156,10 @@ def record_telegrams(duration_minutes: int) -> List[str]:
         # Generate mobile telegram every minute, excluding 5-10 minutes after midnight
         # Flow is 9.9 dm^3/min as there as a 0.1 dm^3/min leak in the pipe system
         minutes_missed_after_midnight = random.randint(5, 10)
-        if not (current_time.hour == 0 and 0 <= current_time.minute <= minutes_missed_after_midnight):
+        if not (
+            current_time.hour == 0
+            and 0 <= current_time.minute <= minutes_missed_after_midnight
+        ):
             volume += 9.9
 
             mobile_telegram = f"Mobile telegram at {current_time.strftime('%Y-%m-%d %H:%M:%S')} Volume: {volume:.1f}"
@@ -169,8 +172,9 @@ def record_telegrams(duration_minutes: int) -> List[str]:
     return telegrams
 
 
-# Example usage:
-duration_minutes = 1200
-telegrams = record_telegrams(duration_minutes)
-for telegram in telegrams:
-    print(telegram)
+if __name__ == "__main__":
+    # Example usage:
+    duration_minutes = 1200
+    telegrams = record_telegrams(duration_minutes)
+    for telegram in telegrams:
+        print(telegram)
